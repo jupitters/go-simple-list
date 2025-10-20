@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gorilla/mux"
@@ -33,4 +34,8 @@ func main() {
 	router.HandleFunc("/api/go/users/{id}", getUser(db)).Methods("GET")
 	router.HandleFunc("/api/go/users/{id}", updateUser(db)).Methods("PUT")
 	router.HandleFunc("/api/go/users/{id}", deleteUser(db)).Methods("DELETE")
+
+	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
+
+	log.Fatal(http.ListenAndServe(":8000", enhancedRouter))
 }
