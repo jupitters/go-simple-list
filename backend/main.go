@@ -61,3 +61,7 @@ func jsonContentTypeMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func getUser(db *sql.DB) http.HandlerFunc {
+
+}
