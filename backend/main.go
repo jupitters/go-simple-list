@@ -145,9 +145,16 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 		vars := mux.Vars(r)
 		id := vars["id"]
 
-		_, err := db.Exec("DELETE FROM users WHERE id = ?", id)
+		var u User
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email)
 		if err != nil {
-			log.Fatal(err)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		} else {
+			_, err := db.Exec("DELETE FROM users WHERE id = ?", id)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 
 		json.NewEncoder(w).Encode(http.StatusOK)
