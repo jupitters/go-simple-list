@@ -156,8 +156,9 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 				w.WriteHeader(http.StatusNotFound)
 				return
 			}
+
+			json.NewEncoder(w).Encode(http.StatusOK)
 		}
 
-		json.NewEncoder(w).Encode(http.StatusOK)
 	}
 }
