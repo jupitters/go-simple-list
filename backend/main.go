@@ -86,3 +86,7 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(users)
 	}
 }
+
+func createUser(db *sql.DB) http.HandlerFunc {
+
+}
