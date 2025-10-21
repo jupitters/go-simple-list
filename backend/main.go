@@ -87,6 +87,6 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 	}
 }
 
-func createUser(db *sql.DB) http.HandlerFunc {
+func getUser(db *sql.DB) http.HandlerFunc {
 
 }
