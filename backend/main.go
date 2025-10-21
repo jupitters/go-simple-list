@@ -130,7 +130,13 @@ func updateUser(db *sql.DB) http.HandlerFunc {
 			log.Fatal(err)
 		}
 
-		json.NewEncoder(w).Encode(u)
+		var updatedUser User
+		err = db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&updatedUser.Id, &updatedUser.Name, &updatedUser.Email)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		json.NewEncoder(w).Encode(updatedUser)
 	}
 }
 
