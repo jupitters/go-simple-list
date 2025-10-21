@@ -88,5 +88,16 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 }
 
 func getUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
 
+		var u User
+		err := db.QueryRow("SEELCT * FROM users WHERE id = ?", id).Scan(&u.Id, &u.Name, &u.Email)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+	}
 }
