@@ -99,5 +99,6 @@ func getUser(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
+		json.NewEncoder(w).Encode(u)
 	}
 }
