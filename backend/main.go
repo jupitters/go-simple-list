@@ -87,6 +87,14 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 	}
 }
 
+func createUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var u User
+		json.NewDecoder(r.Body).Decode(&u)
+
+	}
+}
+
 func getUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
