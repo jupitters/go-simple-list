@@ -105,6 +105,14 @@ func getUser(db *sql.DB) http.HandlerFunc {
 
 func deleteUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
 
+		_, err := db.Exec("DELETE FROM users WHERE id = ?", id)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		json.NewEncoder(w).Encode(http.StatusOK)
 	}
 }
