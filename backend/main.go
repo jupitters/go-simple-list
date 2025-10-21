@@ -153,7 +153,8 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 		} else {
 			_, err := db.Exec("DELETE FROM users WHERE id = ?", id)
 			if err != nil {
-				log.Fatal(err)
+				w.WriteHeader(http.StatusNotFound)
+				return
 			}
 		}
 
