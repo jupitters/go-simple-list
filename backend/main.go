@@ -157,7 +157,7 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 				return
 			}
 
-			json.NewEncoder(w).Encode(http.StatusOK)
+			json.NewEncoder(w).Encode("Deleted!")
 		}
 	}
 }
