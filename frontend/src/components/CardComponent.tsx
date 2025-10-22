@@ -8,7 +8,10 @@ interface Card {
 
 const CardComponent: React.FC<{ card: Card}> = ({ card }) => {
   return (
-    <div>CardComponent</div>
+    <div>
+        <h2>{card.name}</h2>
+        <p>{card.email}</p>
+    </div>
   )
 }
 
