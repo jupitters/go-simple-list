@@ -6,7 +6,11 @@ interface User {
     email: string;
 }
 
-const UserInterface = () => {
+interface UserInterfaceProps {
+    backendName: string; // go
+}
+
+const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
   return (
     <div>UserInterface</div>
   )
