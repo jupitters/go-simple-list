@@ -6,7 +6,7 @@ interface Card {
     email: string;
 }
 
-const CardComponent = () => {
+const CardComponent: React.FC<{ card: Card}> = ({ card }) => {
   return (
     <div>CardComponent</div>
   )
