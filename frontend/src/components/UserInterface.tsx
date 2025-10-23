@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 interface User {
@@ -11,7 +12,7 @@ interface UserInterfaceProps {
 }
 
 const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
-  const apuUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
   const [users, setUsers] = useState<User[]>([]);
   const [newUser, setNewUser] = useState({name: '', email: ''});
   const [updateUser, setUpdateUser] = useState({id: '', name: '', email: ''});
@@ -25,7 +26,20 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
   
   const bgColor = backgroundColors[backendName as keyof typeof backgroundColors] || 'bg-gray-200';
   const btnColor = buttonColors[backendName as keyof typeof buttonColors] || 'gb-gray-500 hover:bg-gray-600';
-  
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try{
+            const response = await axios.get(`${apiUrl}/api/${backendName}/users`);
+            setUsers(response.data.reverse());
+        } catch (error) {
+            console.log("Error fetching data: ", error);
+        }
+    };
+
+    fetchData();
+  }, [backendName, apiUrl]);
+
 }
 
 export default UserInterface
