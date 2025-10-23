@@ -40,6 +40,11 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
     fetchData();
   }, [backendName, apiUrl]);
 
+  return (
+    <div className={`userInterface ${bgColor} ${backendName} w-full max-w-md p-4 my-4 rounded shadow`}>
+        test
+    </div>
+  );
 }
 
 export default UserInterface
