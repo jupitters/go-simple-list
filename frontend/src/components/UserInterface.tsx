@@ -29,7 +29,18 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
   const bgColor = backgroundColors[backendName as keyof typeof backgroundColors] || 'bg-gray-200';
   const btnColor = buttonColors[backendName as keyof typeof buttonColors] || 'gb-gray-500 hover:bg-gray-600';
 
-  
+  useEffect(() => {
+    const fetchData = async () => {
+        try{
+            const response = await axios.get(`${apiUrl}/api/${backendName}/users`);
+            setUsers(response.data.reverse());
+        } catch (error) {
+            console.log("Error fetching data: ", error);
+        }
+    };
+
+    fetchData();
+  }, [backendName, apiUrl]);
 
   const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,8 +52,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
 
   return (
     <div className={`userInterface ${bgColor} ${backendName} w-full max-w-md p-4 my-4 rounded shadow`}>
-        <Image src={`/${backendName}logo.svg`} width={80} height={80} alt={`${backendName} Logo`} className='w-20 h-20 mb-6 mx-auto' />
-        <h2 className="text-x1 font-bold text-center text-white mb-6">{`${backendName.charAt(0).toUpperCase() + backendName.slice(1)} Backend`}</h2>
+        
 
         <div className='space-y-4'>
             {users.map((user) => (
