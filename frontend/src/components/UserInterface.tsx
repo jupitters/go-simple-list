@@ -55,7 +55,14 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
         <Image src={`/${backendName}logo.svg`} width={80} height={80} alt={`${backendName} Logo`} className='w-20 h-20 mb-6 mx-auto' />
         <h2 className="text-x1 font-bold text-center text-white mb-6">{`${backendName.charAt(0).toUpperCase() + backendName.slice(1)} Backend`}</h2>
 
-        
+        <div className='space-y-4'>
+            {users.map((user) => (
+                <div key={user.id} className='flex items-center justify-between bg-white p-4 rounded shadow'>
+                    <CardComponent card={user} />
+                    {/* <button onClick={() => deleteUser(user.id)} className={`${btnColor } text-white py-2 px-4 rounded`}>
+                        Delete User
+                    </button> */}
+                </div>
             ))}
         </div>
     </div>
