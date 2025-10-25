@@ -29,7 +29,18 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
   const bgColor = backgroundColors[backendName as keyof typeof backgroundColors] || 'bg-gray-200';
   const btnColor = buttonColors[backendName as keyof typeof buttonColors] || 'gb-gray-500 hover:bg-gray-600';
 
-  
+  useEffect(() => {
+    const fetchData = async () => {
+        try{
+            const response = await axios.get(`${apiUrl}/api/${backendName}/users`);
+            setUsers(response.data.reverse());
+        } catch (error) {
+            console.log("Error fetching data: ", error);
+        }
+    };
+
+    fetchData();
+  }, [backendName, apiUrl]);
 
   const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
