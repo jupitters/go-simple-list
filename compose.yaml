@@ -1,4 +1,5 @@
 services:
+
   goapp:
     container_name: goapp
     image: goapp:1.0.0
