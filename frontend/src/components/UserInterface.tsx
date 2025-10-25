@@ -87,7 +87,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
           </button>
         </form>
 
-        <form>
+        <form onSubmit={updateUser} className='mb-6 p-4 bg-blue-100 rounded shadow'>
           <input placeholder='User ID' value={updateUser.id} onChange={(e) => setUpdateUser({...updateUser, id: e.target.value})} className='mb-2 w-full p-2 border border-gray-300 rounded' />
           <input placeholder='New Name' value={updateUser.name} onChange={(e) => setUpdateUser({...updateUser, id: e.target.value})} className='mb-2 w-full p-2 border border-gray-300 rounded' />
           <input placeholder='New Email' value={updateUser.email} onChange={(e) => setUpdateUser({...updateUser, email: e.target.value})} className='mb-2 w-full p-2 border border-gray-300 rounded' />
