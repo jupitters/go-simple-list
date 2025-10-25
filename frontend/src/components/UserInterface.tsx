@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import CardComponent from './CardComponent';
-import { create } from 'domain';
-
 interface User {
     id: number;
     name: string;
