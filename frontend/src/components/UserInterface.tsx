@@ -47,6 +47,10 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
 
     try{
       const response = await axios.post(`${apiUrl}/api/${backendName}/users`, newUser);
+      setUsers([response.data, ...users]);
+      setNewUser({name:'', email:''});
+    } catch (error) {
+      console.error("Error creating user: ", error);
     }
   };
 
