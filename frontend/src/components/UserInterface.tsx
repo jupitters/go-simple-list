@@ -55,6 +55,25 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
     }
   };
 
+  const handleUpdateUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try{
+      await axios.put(`${apiUrl}/api/${backendName}/users/${updateUser.id}`, {name: updateUser.name, email: updateUser.email});
+      setUpdateUser({id: '', name: '', email: ''});
+      setUsers(
+        users.map((user) => {
+          if(user.id === parseInt(updateUser.id)) {
+            return {...user, name: updateUser.name, email: updateUser.email };
+          }
+          return user;
+        })
+      )
+    } catch(error) {
+      console.error("Error updating user: ", error);
+    }
+  };
+
   return (
     <div className={`userInterface ${bgColor} ${backendName} w-full max-w-md p-4 my-4 rounded shadow`}>
         <Image src={`/${backendName}logo.svg`} width={80} height={80} alt={`${backendName} Logo`} className='w-20 h-20 mb-6 mx-auto' />
