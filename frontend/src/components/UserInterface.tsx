@@ -18,15 +18,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
   const [newUser, setNewUser] = useState({name: '', email: ''});
   const [updateUser, setUpdateUser] = useState({id: '', name: '', email: ''});
 
-  const backgroundColors: { [key: string]: string} = {
-    go: 'bg-cyan-500',
-  };
-  const buttonColors: { [key: string]: string } = {
-    go: 'bg-cyan-700 hover:bg-blue-600',
-  };
-  
-  const bgColor = backgroundColors[backendName as keyof typeof backgroundColors] || 'bg-gray-200';
-  const btnColor = buttonColors[backendName as keyof typeof buttonColors] || 'gb-gray-500 hover:bg-gray-600';
+
 
   useEffect(() => {
     const fetchData = async () => {
