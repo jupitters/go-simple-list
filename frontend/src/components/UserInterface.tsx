@@ -72,14 +72,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
     }
   };
 
-  const deleteUser = async (userId: number) => {
-    try{
-      await axios.delete(`${apiUrl}/api/${backendName}/users/${userId}`);
-      setUsers(users.filter((user) => user.id != userId));
-    } catch (error) {
-      console.error("Error deleting user: ", error);
-    }
-  }
+  
 
   return (
     <div className={`userInterface ${bgColor} ${backendName} w-full max-w-md p-4 my-4 rounded shadow`}>
